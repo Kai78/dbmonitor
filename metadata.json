@@ -1,0 +1,8 @@
+{
+  "name": "DBMonitor Platform",
+  "description": "Modular Python database monitoring platform with discovery providers, engine-isolated pollers, high/low frequency pools, transactional outbox scheduling, and declarative bundle ingestion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

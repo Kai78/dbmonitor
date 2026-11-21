@@ -1,0 +1,23 @@
+ARG PLUGIN=postgresql
+FROM python:3.11-slim
+
+ARG PLUGIN
+WORKDIR /app
+
+COPY packages/dbmonitor-common /app/packages/dbmonitor-common
+COPY packages/dbmonitor-sdk /app/packages/dbmonitor-sdk
+COPY packages/dbmonitor-worker-runtime /app/packages/dbmonitor-worker-runtime
+COPY plugins/pollers/${PLUGIN} /app/plugins/pollers/${PLUGIN}
+
+RUN if [ -f /app/plugins/pollers/${PLUGIN}/image/system-deps.txt ]; then \
+      apt-get update && xargs -a /app/plugins/pollers/${PLUGIN}/image/system-deps.txt apt-get install -y --no-install-recommends && rm -rf /var/lib/apt/lists/*; \
+    fi
+
+RUN pip install --no-cache-dir \
+    /app/packages/dbmonitor-common \
+    /app/packages/dbmonitor-sdk \
+    /app/packages/dbmonitor-worker-runtime \
+    /app/plugins/pollers/${PLUGIN}
+
+ENV DBMONITOR_DB_TYPE=${PLUGIN}
+ENTRYPOINT ["python3", "-m", "dbmonitor_worker_runtime"]

@@ -1,0 +1,7 @@
+[project]
+name = "dbmonitor-poller-mssql"
+version = "1.0.0"
+dependencies = ["dbmonitor-sdk>=1.0,<2.0", "pyodbc>=5.1"]
+
+[project.entry-points."dbmonitor.pollers"]
+mssql = "dbmonitor_poller_mssql.plugin:plugin"

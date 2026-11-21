@@ -1,0 +1,7 @@
+[project]
+name = "dbmonitor-poller-oracle"
+version = "1.0.0"
+dependencies = ["dbmonitor-sdk>=1.0,<2.0", "oracledb>=2.2"]
+
+[project.entry-points."dbmonitor.pollers"]
+oracle = "dbmonitor_poller_oracle.plugin:plugin"

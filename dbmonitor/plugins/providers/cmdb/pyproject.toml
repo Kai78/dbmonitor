@@ -1,0 +1,7 @@
+[project]
+name = "dbmonitor-provider-cmdb"
+version = "1.0.0"
+dependencies = ["dbmonitor-sdk>=1.0,<2.0"]
+
+[project.entry-points."dbmonitor.providers"]
+cmdb = "dbmonitor_provider_cmdb.plugin:plugin"

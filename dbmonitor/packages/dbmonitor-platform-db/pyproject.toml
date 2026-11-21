@@ -1,0 +1,10 @@
+[project]
+name = "dbmonitor-platform-db"
+version = "2.0.0"
+description = "Central PostgreSQL-compatible persistence models, transactional outbox, and repositories (services only)"
+requires-python = ">=3.11"
+dependencies = ["dbmonitor-common>=2.0", "dbmonitor-sdk>=1.0"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

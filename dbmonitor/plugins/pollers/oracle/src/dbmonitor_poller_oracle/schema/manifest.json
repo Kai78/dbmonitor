@@ -1,0 +1,53 @@
+{
+  "plugin_id": "dbmonitor-poller-oracle",
+  "db_type": "oracle",
+  "schema": "metrics_oracle",
+  "schema_version": "0002",
+  "tables": {
+    "instance_health": {
+      "required": true,
+      "partition": { "column": "collected_at", "interval": "day" },
+      "retention_days": 14,
+      "natural_key": [],
+      "columns": {
+        "is_available": { "type": "boolean", "nullable": false },
+        "response_time_ms": { "type": "integer", "nullable": true, "unit": "ms" },
+        "instance_status": { "type": "text", "nullable": false },
+        "open_mode": { "type": "text", "nullable": false }
+      }
+    },
+    "active_sessions": {
+      "required": false,
+      "partition": { "column": "collected_at", "interval": "day" },
+      "retention_days": 14,
+      "natural_key": [],
+      "columns": {
+        "active_sessions": { "type": "integer", "nullable": false },
+        "blocked_sessions": { "type": "integer", "nullable": false },
+        "total_sessions": { "type": "integer", "nullable": false }
+      }
+    },
+    "wait_events": {
+      "required": false,
+      "partition": { "column": "collected_at", "interval": "week" },
+      "retention_days": 90,
+      "natural_key": ["wait_class"],
+      "columns": {
+        "wait_class": { "type": "text", "nullable": false },
+        "total_waits": { "type": "bigint", "nullable": false },
+        "time_waited_ms": { "type": "bigint", "nullable": false, "unit": "ms" }
+      }
+    },
+    "tablespace_usage": {
+      "required": false,
+      "partition": { "column": "collected_at", "interval": "week" },
+      "retention_days": 365,
+      "natural_key": ["tablespace_name"],
+      "columns": {
+        "tablespace_name": { "type": "text", "nullable": false },
+        "allocated_bytes": { "type": "bigint", "nullable": false, "unit": "bytes" },
+        "used_percent": { "type": "double", "nullable": false, "unit": "percent" }
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "plugin_id": "dbmonitor-poller-mssql",
+  "db_type": "mssql",
+  "schema": "metrics_mssql",
+  "schema_version": "0002",
+  "tables": {
+    "instance_health": {
+      "required": true,
+      "partition": { "column": "collected_at", "interval": "day" },
+      "retention_days": 14,
+      "natural_key": [],
+      "columns": {
+        "is_available": { "type": "boolean", "nullable": false },
+        "response_time_ms": { "type": "integer", "nullable": true, "unit": "ms" },
+        "product_version": { "type": "text", "nullable": false },
+        "is_hadr_enabled": { "type": "boolean", "nullable": false }
+      }
+    },
+    "user_connections": {
+      "required": false,
+      "partition": { "column": "collected_at", "interval": "day" },
+      "retention_days": 14,
+      "natural_key": [],
+      "columns": {
+        "user_connections": { "type": "integer", "nullable": false },
+        "blocked_processes": { "type": "integer", "nullable": false }
+      }
+    },
+    "buffer_pool": {
+      "required": false,
+      "partition": { "column": "collected_at", "interval": "week" },
+      "retention_days": 90,
+      "natural_key": [],
+      "columns": {
+        "page_life_expectancy_seconds": { "type": "integer", "nullable": false, "unit": "seconds" },
+        "buffer_cache_hit_percent": { "type": "double", "nullable": false, "unit": "percent" }
+      }
+    },
+    "database_file_sizes": {
+      "required": false,
+      "partition": { "column": "collected_at", "interval": "week" },
+      "retention_days": 365,
+      "natural_key": ["database_name", "file_type"],
+      "columns": {
+        "database_name": { "type": "text", "nullable": false },
+        "file_type": { "type": "text", "nullable": false },
+        "size_bytes": { "type": "bigint", "nullable": false, "unit": "bytes" },
+        "used_percent": { "type": "double", "nullable": false, "unit": "percent" }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "plugin_id": "dbmonitor-poller-postgresql",
+  "db_type": "postgresql",
+  "schema": "metrics_postgresql",
+  "schema_version": "0003",
+  "tables": {
+    "instance_health": {
+      "required": true,
+      "partition": { "column": "collected_at", "interval": "day" },
+      "retention_days": 14,
+      "natural_key": [],
+      "columns": {
+        "is_available": { "type": "boolean", "nullable": false },
+        "response_time_ms": { "type": "integer", "nullable": true, "unit": "ms" },
+        "server_version": { "type": "text", "nullable": true },
+        "in_recovery": { "type": "boolean", "nullable": false }
+      }
+    },
+    "connections": {
+      "required": false,
+      "partition": { "column": "collected_at", "interval": "day" },
+      "retention_days": 14,
+      "natural_key": [],
+      "columns": {
+        "active_connections": { "type": "integer", "nullable": false },
+        "idle_connections": { "type": "integer", "nullable": false },
+        "waiting_connections": { "type": "integer", "nullable": false },
+        "max_connections": { "type": "integer", "nullable": false }
+      }
+    },
+    "replication_lag": {
+      "required": false,
+      "partition": { "column": "collected_at", "interval": "day" },
+      "retention_days": 14,
+      "natural_key": ["replica_name"],
+      "columns": {
+        "replica_name": { "type": "text", "nullable": false },
+        "lag_bytes": { "type": "bigint", "nullable": false, "unit": "bytes" },
+        "replay_lag_ms": { "type": "integer", "nullable": false, "unit": "ms" }
+      }
+    },
+    "table_statistics": {
+      "required": false,
+      "partition": { "column": "collected_at", "interval": "week" },
+      "retention_days": 90,
+      "natural_key": ["schema_name", "table_name"],
+      "columns": {
+        "schema_name": { "type": "text", "nullable": false },
+        "table_name": { "type": "text", "nullable": false },
+        "size_bytes": { "type": "bigint", "nullable": false, "unit": "bytes" },
+        "dead_tuples": { "type": "bigint", "nullable": false }
+      }
+    },
+    "database_capacity": {
+      "required": false,
+      "partition": { "column": "collected_at", "interval": "week" },
+      "retention_days": 365,
+      "natural_key": ["database_name"],
+      "columns": {
+        "database_name": { "type": "text", "nullable": false },
+        "allocated_bytes": { "type": "bigint", "nullable": false, "unit": "bytes" },
+        "used_percent": { "type": "double", "nullable": false, "unit": "percent" }
+      }
+    }
+  }
+}

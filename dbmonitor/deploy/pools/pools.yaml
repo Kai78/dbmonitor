@@ -1,0 +1,9 @@
+polling_pools:
+  high_frequency:
+    queue_template: "poll.{db_type}.high_frequency"
+    results_queue: "results.high_frequency"
+    expiry_factor: 1.0
+  low_frequency:
+    queue_template: "poll.{db_type}.low_frequency"
+    results_queue: "results.low_frequency"
+    expiry_factor: 1.0

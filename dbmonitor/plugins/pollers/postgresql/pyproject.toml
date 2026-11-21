@@ -1,0 +1,7 @@
+[project]
+name = "dbmonitor-poller-postgresql"
+version = "1.0.0"
+dependencies = ["dbmonitor-sdk>=1.0,<2.0", "psycopg>=3.2"]
+
+[project.entry-points."dbmonitor.pollers"]
+postgresql = "dbmonitor_poller_postgresql.plugin:plugin"

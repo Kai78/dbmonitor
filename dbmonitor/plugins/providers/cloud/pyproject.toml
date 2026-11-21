@@ -1,0 +1,7 @@
+[project]
+name = "dbmonitor-provider-cloud"
+version = "1.0.0"
+dependencies = ["dbmonitor-sdk>=1.0,<2.0"]
+
+[project.entry-points."dbmonitor.providers"]
+cloud = "dbmonitor_provider_cloud.plugin:plugin"

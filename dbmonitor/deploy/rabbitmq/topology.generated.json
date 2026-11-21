@@ -1,0 +1,119 @@
+{
+  "generated_by": "tools/generate_rabbitmq_topology.py",
+  "queues": [
+    {
+      "name": "discovery.run",
+      "type": "quorum",
+      "dlq": "dlq.discovery.run"
+    },
+    {
+      "name": "discovery.results",
+      "type": "quorum",
+      "dlq": "dlq.discovery.results"
+    },
+    {
+      "name": "results.high_frequency",
+      "type": "quorum",
+      "dlq": "dlq.results.high_frequency"
+    },
+    {
+      "name": "poll.postgresql.high_frequency",
+      "type": "quorum",
+      "pool": "high_frequency",
+      "db_type": "postgresql",
+      "dlq": "dlq.poll.postgresql.high_frequency"
+    },
+    {
+      "name": "poll.oracle.high_frequency",
+      "type": "quorum",
+      "pool": "high_frequency",
+      "db_type": "oracle",
+      "dlq": "dlq.poll.oracle.high_frequency"
+    },
+    {
+      "name": "poll.mssql.high_frequency",
+      "type": "quorum",
+      "pool": "high_frequency",
+      "db_type": "mssql",
+      "dlq": "dlq.poll.mssql.high_frequency"
+    },
+    {
+      "name": "results.low_frequency",
+      "type": "quorum",
+      "dlq": "dlq.results.low_frequency"
+    },
+    {
+      "name": "poll.postgresql.low_frequency",
+      "type": "quorum",
+      "pool": "low_frequency",
+      "db_type": "postgresql",
+      "dlq": "dlq.poll.postgresql.low_frequency"
+    },
+    {
+      "name": "poll.oracle.low_frequency",
+      "type": "quorum",
+      "pool": "low_frequency",
+      "db_type": "oracle",
+      "dlq": "dlq.poll.oracle.low_frequency"
+    },
+    {
+      "name": "poll.mssql.low_frequency",
+      "type": "quorum",
+      "pool": "low_frequency",
+      "db_type": "mssql",
+      "dlq": "dlq.poll.mssql.low_frequency"
+    }
+  ],
+  "dead_letter_queues": [
+    {
+      "name": "dlq.discovery.run",
+      "type": "quorum",
+      "source_queue": "discovery.run"
+    },
+    {
+      "name": "dlq.discovery.results",
+      "type": "quorum",
+      "source_queue": "discovery.results"
+    },
+    {
+      "name": "dlq.results.high_frequency",
+      "type": "quorum",
+      "source_queue": "results.high_frequency"
+    },
+    {
+      "name": "dlq.poll.postgresql.high_frequency",
+      "type": "quorum",
+      "source_queue": "poll.postgresql.high_frequency"
+    },
+    {
+      "name": "dlq.poll.oracle.high_frequency",
+      "type": "quorum",
+      "source_queue": "poll.oracle.high_frequency"
+    },
+    {
+      "name": "dlq.poll.mssql.high_frequency",
+      "type": "quorum",
+      "source_queue": "poll.mssql.high_frequency"
+    },
+    {
+      "name": "dlq.results.low_frequency",
+      "type": "quorum",
+      "source_queue": "results.low_frequency"
+    },
+    {
+      "name": "dlq.poll.postgresql.low_frequency",
+      "type": "quorum",
+      "source_queue": "poll.postgresql.low_frequency"
+    },
+    {
+      "name": "dlq.poll.oracle.low_frequency",
+      "type": "quorum",
+      "source_queue": "poll.oracle.low_frequency"
+    },
+    {
+      "name": "dlq.poll.mssql.low_frequency",
+      "type": "quorum",
+      "source_queue": "poll.mssql.low_frequency"
+    }
+  ]
+}
